@@ -103,6 +103,5 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Alpha Soft Task Tracker API",
-    "DESCRIPTION": "Учебный API таск-трекера для команды Альфа-Софт.",
     "VERSION": "1.0.0",
 }
