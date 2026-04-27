@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from tasks.models import Project, ProjectMember, Task, TaskComment
+
+admin.site.register(Project)
+admin.site.register(ProjectMember)
+admin.site.register(Task)
+admin.site.register(TaskComment)
