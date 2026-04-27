@@ -59,9 +59,9 @@ class ProjectViewSet(viewsets.ModelViewSet):
         """
         Возвращает только проекты, где пользователь владелец или участник.
         Args:
-            None
+            self (ProjectViewSet): Текущий viewset проектов.
         Returns:
-            QuerySet: Projects available for current user.
+            QuerySet[Project]: Projects available for current user.
         Raises:
             None
         """
@@ -80,9 +80,10 @@ class ProjectViewSet(viewsets.ModelViewSet):
         """
         Сохраняет проект и сразу добавляет создателя в участники.
         Args:
-            serializer: Project serializer with checked data.
+            self (ProjectViewSet): Текущий viewset проектов.
+            serializer (ProjectSerializer): Project serializer with checked data.
         Returns:
-            None
+            None: Функция ничего не возвращает.
         Raises:
             None
         """
@@ -107,9 +108,9 @@ class ProjectMemberViewSet(viewsets.ModelViewSet):
         """
         Показывает участников только из доступных пользователю проектов.
         Args:
-            None
+            self (ProjectMemberViewSet): Текущий viewset участников.
         Returns:
-            QuerySet: Project members from visible projects.
+            QuerySet[ProjectMember]: Project members from visible projects.
         Raises:
             None
         """
@@ -129,9 +130,10 @@ class ProjectMemberViewSet(viewsets.ModelViewSet):
         """
         Удаляет участника, но не дает убрать владельца из его проекта.
         Args:
-            instance: ProjectMember object.
+            self (ProjectMemberViewSet): Текущий viewset участников.
+            instance (ProjectMember): ProjectMember object.
         Returns:
-            None
+            None: Функция ничего не возвращает.
         Raises:
             ValidationError: If owner is removed from own project.
         """
@@ -155,9 +157,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         """
         Возвращает задачи только из проектов текущего пользователя.
         Args:
-            None
+            self (TaskViewSet): Текущий viewset задач.
         Returns:
-            QuerySet: Tasks from visible projects.
+            QuerySet[Task]: Tasks from visible projects.
         Raises:
             None
         """
@@ -175,9 +177,10 @@ class TaskViewSet(viewsets.ModelViewSet):
         """
         Сохраняет задачу и ставит текущего пользователя автором.
         Args:
-            serializer: Task serializer with checked data.
+            self (TaskViewSet): Текущий viewset задач.
+            serializer (TaskSerializer): Task serializer with checked data.
         Returns:
-            None
+            None: Функция ничего не возвращает.
         Raises:
             None
         """
@@ -198,9 +201,9 @@ class TaskCommentViewSet(viewsets.ModelViewSet):
         """
         Возвращает комментарии только к задачам доступных проектов.
         Args:
-            None
+            self (TaskCommentViewSet): Текущий viewset комментариев.
         Returns:
-            QuerySet: Task comments from visible projects.
+            QuerySet[TaskComment]: Task comments from visible projects.
         Raises:
             None
         """
@@ -220,9 +223,10 @@ class TaskCommentViewSet(viewsets.ModelViewSet):
         """
         Сохраняет комментарий от имени текущего пользователя.
         Args:
-            serializer: Task comment serializer with checked data.
+            self (TaskCommentViewSet): Текущий viewset комментариев.
+            serializer (TaskCommentSerializer): Task comment serializer with checked data.
         Returns:
-            None
+            None: Функция ничего не возвращает.
         Raises:
             None
         """

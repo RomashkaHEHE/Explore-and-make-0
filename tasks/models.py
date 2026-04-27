@@ -28,7 +28,7 @@ class Project(models.Model):
         """
         Возвращает название проекта, чтобы в админке было понятно.
         Args:
-            None
+            self (Project): Текущий проект.
         Returns:
             str: Project title.
         Raises:
@@ -65,7 +65,7 @@ class ProjectMember(models.Model):
         """
         Собирает короткую подпись участника проекта.
         Args:
-            None
+            self (ProjectMember): Текущая связь проекта и пользователя.
         Returns:
             str: Project and username text.
         Raises:
@@ -127,7 +127,7 @@ class Task(models.Model):
         """
         Возвращает заголовок задачи для списков и админки.
         Args:
-            None
+            self (Task): Текущая задача.
         Returns:
             str: Task title.
         Raises:
@@ -160,7 +160,7 @@ class TaskComment(models.Model):
         """
         Делает короткую подпись комментария, чтобы не выводить весь текст.
         Args:
-            None
+            self (TaskComment): Текущий комментарий.
         Returns:
             str: Short comment text.
         Raises:

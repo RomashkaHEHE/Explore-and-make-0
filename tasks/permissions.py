@@ -10,9 +10,10 @@ class ProjectPermission(BasePermission):
         """
         Решает, что можно делать с конкретным проектом.
         Args:
-            request: DRF request object.
-            view: DRF view object.
-            obj: Project object.
+            self (ProjectPermission): Текущий permission-класс.
+            request (Request): DRF request object.
+            view (APIView): DRF view object.
+            obj (Project): Project object.
         Returns:
             bool: True if action is allowed.
         Raises:
@@ -30,9 +31,10 @@ class ProjectMemberPermission(BasePermission):
         """
         Проверяет доступ к конкретной записи участника проекта.
         Args:
-            request: DRF request object.
-            view: DRF view object.
-            obj: ProjectMember object.
+            self (ProjectMemberPermission): Текущий permission-класс.
+            request (Request): DRF request object.
+            view (APIView): DRF view object.
+            obj (ProjectMember): ProjectMember object.
         Returns:
             bool: True if action is allowed.
         Raises:
@@ -50,9 +52,10 @@ class TaskPermission(BasePermission):
         """
         Проверяет, какие поля задачи можно менять пользователю.
         Args:
-            request: DRF request object.
-            view: DRF view object.
-            obj: Task object.
+            self (TaskPermission): Текущий permission-класс.
+            request (Request): DRF request object.
+            view (APIView): DRF view object.
+            obj (Task): Task object.
         Returns:
             bool: True if action is allowed.
         Raises:
@@ -85,9 +88,10 @@ class TaskCommentPermission(BasePermission):
         """
         Проверяет доступ к конкретному комментарию.
         Args:
-            request: DRF request object.
-            view: DRF view object.
-            obj: TaskComment object.
+            self (TaskCommentPermission): Текущий permission-класс.
+            request (Request): DRF request object.
+            view (APIView): DRF view object.
+            obj (TaskComment): TaskComment object.
         Returns:
             bool: True if action is allowed.
         Raises:

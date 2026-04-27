@@ -36,7 +36,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         """
         Создает пользователя и нормально сохраняет пароль через Django.
         Args:
-            validated_data: Checked user data from serializer.
+            self (UserRegistrationSerializer): Текущий сериализатор.
+            validated_data (dict): Проверенные данные пользователя.
         Returns:
             User: Created user object.
         Raises:
@@ -81,7 +82,8 @@ class ProjectMemberSerializer(serializers.ModelSerializer):
         """
         Проверяет, что участников меняет только владелец проекта.
         Args:
-            attrs: Incoming member data.
+            self (ProjectMemberSerializer): Текущий сериализатор.
+            attrs (dict): Данные участника проекта.
         Returns:
             dict: Validated member data.
         Raises:
@@ -134,7 +136,8 @@ class TaskSerializer(serializers.ModelSerializer):
         """
         Проверяет, что задача не выходит за пределы своего проекта.
         Args:
-            attrs: Incoming task data.
+            self (TaskSerializer): Текущий сериализатор.
+            attrs (dict): Данные задачи.
         Returns:
             dict: Validated task data.
         Raises:
@@ -178,7 +181,8 @@ class TaskCommentSerializer(serializers.ModelSerializer):
         """
         Проверяет, что комментарий пишет участник нужного проекта.
         Args:
-            attrs: Incoming comment data.
+            self (TaskCommentSerializer): Текущий сериализатор.
+            attrs (dict): Данные комментария.
         Returns:
             dict: Validated comment data.
         Raises:

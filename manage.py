@@ -7,9 +7,9 @@ def main():
     """
     Запускает команды Django из консоли, типа миграций или сервера.
     Args:
-        None
+        None: У функции нет аргументов.
     Returns:
-        None
+        None: Функция ничего не возвращает.
     Raises:
         ImportError: If Django cannot be imported.
     """
