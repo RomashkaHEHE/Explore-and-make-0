@@ -1,0 +1,102 @@
+from rest_framework.permissions import SAFE_METHODS, BasePermission
+
+from tasks.utils import user_in_project
+
+
+class ProjectPermission(BasePermission):
+    """Права для просмотра и изменения проектов."""
+
+    def has_object_permission(self, request, view, obj):
+        """
+        Решает, что можно делать с конкретным проектом.
+        Args:
+            request: DRF request object.
+            view: DRF view object.
+            obj: Project object.
+        Returns:
+            bool: True if action is allowed.
+        Raises:
+            None
+        """
+        if request.method in SAFE_METHODS:
+            return user_in_project(request.user, obj)
+        return obj.owner_id == request.user.id
+
+
+class ProjectMemberPermission(BasePermission):
+    """Права для списка участников проекта."""
+
+    def has_object_permission(self, request, view, obj):
+        """
+        Проверяет доступ к конкретной записи участника проекта.
+        Args:
+            request: DRF request object.
+            view: DRF view object.
+            obj: ProjectMember object.
+        Returns:
+            bool: True if action is allowed.
+        Raises:
+            None
+        """
+        if request.method in SAFE_METHODS:
+            return user_in_project(request.user, obj.project)
+        return obj.project.owner_id == request.user.id
+
+
+class TaskPermission(BasePermission):
+    """Права для задач с простыми правилами из задания."""
+
+    def has_object_permission(self, request, view, obj):
+        """
+        Проверяет, какие поля задачи можно менять пользователю.
+        Args:
+            request: DRF request object.
+            view: DRF view object.
+            obj: Task object.
+        Returns:
+            bool: True if action is allowed.
+        Raises:
+            None
+        """
+        if request.method in SAFE_METHODS:
+            return user_in_project(request.user, obj.project)
+
+        if obj.project.owner_id == request.user.id:
+            return True
+
+        if request.method == "DELETE":
+            return obj.author_id == request.user.id
+
+        changed_fields = set(request.data.keys())
+
+        if obj.assignee_id == request.user.id:
+            return changed_fields.issubset({"status", "priority"})
+
+        if obj.author_id == request.user.id:
+            return changed_fields.issubset({"description"})
+
+        return False
+
+
+class TaskCommentPermission(BasePermission):
+    """Права для комментариев к задачам."""
+
+    def has_object_permission(self, request, view, obj):
+        """
+        Проверяет доступ к конкретному комментарию.
+        Args:
+            request: DRF request object.
+            view: DRF view object.
+            obj: TaskComment object.
+        Returns:
+            bool: True if action is allowed.
+        Raises:
+            None
+        """
+        if request.method in SAFE_METHODS:
+            return user_in_project(request.user, obj.task.project)
+
+        if obj.task.project.owner_id == request.user.id:
+            return True
+
+        return obj.author_id == request.user.id
